@@ -1,0 +1,1 @@
+export const baseURL = "https://humble-rub-production.up.railway.app"
