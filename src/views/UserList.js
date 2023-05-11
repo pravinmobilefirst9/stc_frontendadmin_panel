@@ -52,9 +52,9 @@ const UserList = () => {
         layout={
           <>
             <div className="m-0 lg:m-5">
-              <div>
+              {/* <div>
                 <Heading title="User Data" />
-              </div>
+              </div> */}
               <div className="m-0 lg:m-10">
                 {loader ? (
                   <div className="flex items-center justify-center mt-10">

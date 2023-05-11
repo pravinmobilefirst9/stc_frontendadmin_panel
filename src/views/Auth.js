@@ -26,7 +26,7 @@ const Auth = () => {
 
   const authLogin = async () => {
     console.log("aauth login clicked");
-    setLoader(true);
+    // setLoader(true);
     const res = await login(username, password);
     if (res.data.access_token) {
       setToken(res?.data?.access_token);
