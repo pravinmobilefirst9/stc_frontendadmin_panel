@@ -12,9 +12,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" exact element={<Auth />} />
-      <Route path="/verify-otp" exact element={<Otp />} />
+      {/* <Route path="/verify-otp" exact element={<Otp />} /> */}
       <Route path="/user-list" exact element={<UserList />} />
-      <Route path="/request-list" exact element={<RequestList />} />
+      <Route path="/dashboard" exact element={<RequestList />} />
       <Route path="/approved-list" exact element={<ApprovedList />} />
       <Route path="/token-transfer" exact element={<AdminTokenTransfer />} />
     </Routes>

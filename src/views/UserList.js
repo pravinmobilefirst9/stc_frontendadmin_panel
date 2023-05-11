@@ -6,11 +6,12 @@ import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { userListing } from "../api/api";
 
 const UserList = () => {
   const [userData, setUserData] = useState([]);
   const [loader, setLoader] = useState(false);
-  const admin = sessionStorage.getItem("admin");
+  const admin = localStorage.getItem("auth-token");
   const navigate = useNavigate();
   useEffect(() => {
     if (!admin) {
@@ -33,6 +34,16 @@ const UserList = () => {
     //   .catch((err) => {
     //     setLoader(false);
     //   });
+    setLoader(true);
+    const getData = async () => {
+      const res = await userListing();
+      if (res.data) {
+        setUserData(res.data);
+        console.log("res.data", res?.data);
+      }
+      setLoader(false);
+    };
+    getData();
   }, []);
 
   return (
@@ -60,7 +71,7 @@ const UserList = () => {
                   </div>
                 ) : (
                   <>
-                    <Table itemsPerPage={25} userData={userData} />
+                    <Table itemsPerPage={5} userData={userData} />
                   </>
                 )}
               </div>

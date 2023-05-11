@@ -44,22 +44,32 @@ function Items({ currentItems, itemOffset }) {
             <tbody>
               {currentItems.length > 0 ? (
                 currentItems.map((data, idx) => (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      {itemOffset + idx + 1}
-                    </th>
-                    <td className="px-6 py-4">{data?.email}</td>
-                    <td className="px-6 py-4">
-                      {data?.username ? data?.username : "none"}
-                    </td>
-                  </tr>
+                  <>
+                    {console.log("data", data)}
+
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {itemOffset + idx + 1}
+                      </th>
+                      <td className="px-6 py-4">{data?.email}</td>
+                      <td className="px-6 py-4">
+                        {data?.user_id ? data?.user_id : "none"}
+                      </td>
+                      <td className="px-6 py-4">
+                        {data?.organization_admin === true ? "TRUE" : "False"}
+                      </td>
+                      <td className="px-6 py-4">
+                        {data?.user_verified === true ? "TRUE" : "False"}
+                      </td>
+                    </tr>
+                  </>
                 ))
               ) : (
                 <>
-                  <tr className="bg-white border-b px-6 py-4 flex items-start font-bold justify-start dark:bg-gray-800 dark:border-gray-700 ">
+                  <tr className="bg-white border-b px-6 py-4 flex items-start font-bold justify-start dark:bg-gray-800 dark:border-gray-700">
                     No Data Found ...!!
                   </tr>
                 </>

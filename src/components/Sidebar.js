@@ -16,7 +16,7 @@ const Sidebar = ({ layout }) => {
     if (window.location.pathname === "/approved-list") {
       setClickApproveRequest(true);
     }
-    if (window.location.pathname === "/request-list") {
+    if (window.location.pathname === "/dashboard") {
       setClickRequest(true);
     }
     if (window.location.pathname === "/token-transfer") {
@@ -30,7 +30,7 @@ const Sidebar = ({ layout }) => {
   const navigate = useNavigate();
 
   const logout = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     navigate("/");
   };
   return (
@@ -79,11 +79,12 @@ const Sidebar = ({ layout }) => {
             <li>
               <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
                 <div className="flex items-center justify-between w-64">
-                  <h1 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white md:text-4xl lg:text-4xl">
+                  {/* <h1 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white md:text-4xl lg:text-4xl">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-                      5ire
+                      STC
                     </span>
-                  </h1>
+                  </h1> */}
+                  <h1 style={{ fontSize: "30px" }}>STC</h1>
                 </div>
               </div>
               <div className="border-2 -mt-0 mb-8 border-b-[#7E0CD6]"></div>
@@ -91,9 +92,28 @@ const Sidebar = ({ layout }) => {
 
             <li>
               <Link
+                to="/dashboard"
+                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
+                  clickRequest && "bg-red-500"
+                } dark:hover:bg-gray-700`}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+                <span className="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/user-list"
                 className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
-                  clickUser && "bg-gray-100"
+                  clickUser && "bg-red-500"
                 } dark:hover:bg-gray-700`}
               >
                 <svg
@@ -114,30 +134,12 @@ const Sidebar = ({ layout }) => {
                 </span>
               </Link>
             </li>
-            <li>
-              <Link
-                to="/request-list"
-                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
-                  clickRequest && "bg-gray-100"
-                } dark:hover:bg-gray-700`}
-              >
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg>
-                <span className="flex-1 ml-3 whitespace-nowrap">Requests</span>
-              </Link>
-            </li>
-            <li>
+
+            {/* <li>
               <Link
                 to="/approved-list"
                 className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
-                  clickApproveRequest && "bg-gray-100"
+                  clickApproveRequest && "bg-red-500"
                 } dark:hover:bg-gray-700`}
               >
                 <svg
@@ -158,9 +160,9 @@ const Sidebar = ({ layout }) => {
                   Approved Requests
                 </span>
               </Link>
-            </li>
+            </li> */}
             <li>
-              <Link
+              {/* <Link
                 to="/token-transfer"
                 className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
                   tokenTranfer && "bg-gray-100"
@@ -185,7 +187,7 @@ const Sidebar = ({ layout }) => {
                 <span className="flex-1 ml-3 whitespace-nowrap">
                   Token Transfer
                 </span>
-              </Link>
+              </Link> */}
               <div className="border-2 mt-5 mb-16 border-b-[#7E0CD6]"></div>
             </li>
             <li>

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseURL } from "../data/const";
 import { TailSpin } from "react-loader-spinner";
-
+import loginImage from "../asset/images/login.png";
+import { login, setToken } from "../api/api";
 const Auth = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,49 +14,63 @@ const Auth = () => {
 
   const navigate = useNavigate();
 
-  const authLogin = () => {
+  const admin = localStorage.getItem("auth-token");
+
+  useEffect(() => {
+    if (!admin) {
+      navigate("/");
+    } else {
+      navigate("/user-list");
+    }
+  });
+
+  const authLogin = async () => {
+    console.log("aauth login clicked");
     setLoader(true);
-      axios
-        .post(baseURL + "/api/admin/login-admin", {
-          username: username.trim().toLowerCase(),
-          password: password.trim().toLowerCase(),
-        })
-        .then((response) => {
-          toast.success(`Login Success`, {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-            setLoader(false);
-            sessionStorage.setItem("admin", response?.data?.access_token);
-            navigate("/user-list", { state: username.trim().toLowerCase() });
-          
-        })
-        .catch((err) => {
-          toast.error("Wrong Password..!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          setLoader(false);
-        });
-  
+    const res = await login(username, password);
+    if (res.data.access_token) {
+      setToken(res?.data?.access_token);
+      navigate("/dashboard");
+    }
+    // axios
+    //   .post(baseURL + "/api/admin/login-admin", {
+    //     username: username.trim().toLowerCase(),
+    //     password: password.trim().toLowerCase(),
+    //   })
+    //   .then((response) => {
+    //     toast.success(`Login Success`, {
+    //       position: toast.POSITION.TOP_RIGHT,
+    //     });
+    //     setLoader(false);
+    //     sessionStorage.setItem("admin", response?.data?.access_token);
+    //     navigate("/user-list", { state: username.trim().toLowerCase() });
+    //   })
+    //   .catch((err) => {
+    //     toast.error("Wrong Password..!", {
+    //       position: toast.POSITION.TOP_RIGHT,
+    //     });
+    //     setLoader(false);
+    //   });
   };
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <ToastContainer />
-      <div className="flex-1 h-[80vh] flex items-center justify-center max-w-5xl mx-auto overflow-hidden bg-[#B8C9C8] rounded-lg shadow-xl dark:bg-gray-800">
+      <div className="flex-1 h-[80vh] flex items-center justify-center max-w-5xl mx-auto overflow-hidden bg-[#B8C9C8] rounded-lg shadow-xl ">
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="h-32 md:h-auto md:w-1/2">
             <img
               aria-hidden="true"
-              className="object-cover w-full h-full dark:hidden"
-              src="/login.png"
+              className="object-cover w-full h-full"
+              src={loginImage}
               alt="Office"
             />
           </div>
           <div className="flex items-center justify-center bg-[#B8C9C8]  p-6 sm:p-12 md:w-1/2">
             <div className="w-full">
               <div className="flex items-center justify-center">
-                <div className="w-10 mr-1">
+                {/* <div className="w-10 mr-1">
                   <img src="/transperent.svg" />
-                </div>
+                </div> */}
                 <h1 className="text-4xl text-center font-semibold text-gray-700 dark:text-gray-200">
                   STC ADMIN
                 </h1>
@@ -70,7 +85,7 @@ const Auth = () => {
                 </span>
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="example@domain.com"
+                  placeholder="example@gmail.com"
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </label>
@@ -83,6 +98,7 @@ const Auth = () => {
                   {/* Password */}
                 </span>
                 <input
+                  type="password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="*******"
                   onChange={(e) => setPassword(e.target.value)}

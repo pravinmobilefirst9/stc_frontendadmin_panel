@@ -11,7 +11,7 @@ const ApprovedList = () => {
   const [requestData, setRequestData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [state, setState] = useState(false);
-  const admin = sessionStorage.getItem("admin");
+  const admin = localStorage.getItem("auth-token");
 
   const navigate = useNavigate();
   useEffect(() => {

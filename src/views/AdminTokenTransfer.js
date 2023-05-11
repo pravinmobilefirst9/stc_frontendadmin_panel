@@ -15,7 +15,7 @@ const AdminTokenTransfer = () => {
   const [loader, setLoader] = useState(false);
   const [loader1, setLoader1] = useState(false);
   const [token, setToken] = useState("");
-  const admin = sessionStorage.getItem("admin");
+  const admin = localStorage.getItem("auth-token");
   const navigate = useNavigate();
   useEffect(() => {
     if (!admin) {
@@ -140,7 +140,7 @@ const AdminTokenTransfer = () => {
                         control: (baseStyles, state) => ({
                           ...baseStyles,
                           borderColor: "#64748b",
-                          padding: "4px"
+                          padding: "4px",
                         }),
                         placeholder: (defaultStyles) => {
                           return {

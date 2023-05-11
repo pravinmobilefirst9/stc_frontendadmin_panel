@@ -3,10 +3,16 @@ export const headerData = [
     title: "Id",
   },
   {
-    title: "Email id",
+    title: "Email",
   },
   {
-    title: "User Name",
+    title: "User ID",
+  },
+  {
+    title: "organization admin",
+  },
+  {
+    title: "user verified",
   },
 ];
 
@@ -18,7 +24,7 @@ export const headerData2 = [
     title: "Email id",
   },
   {
-    title: "token"
+    title: "token",
   },
   {
     title: "options",
@@ -33,7 +39,7 @@ export const headerData3 = [
     title: "Email id",
   },
   {
-    title: "token"
+    title: "token",
   },
   {
     title: "Status",

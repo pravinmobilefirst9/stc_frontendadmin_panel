@@ -12,7 +12,7 @@ const RequestList = () => {
   const [loader, setLoader] = useState(false);
   const [balance, setBalance] = useState(0);
   const [state, setState] = useState(false);
-  const admin = sessionStorage.getItem("admin");
+  const admin = localStorage.getItem("auth-token");
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -84,7 +84,7 @@ const RequestList = () => {
                   </div>
                 ) : (
                   <>
-                    <div className="flex items-end justify-end mr-2">
+                    {/* <div className="flex items-end justify-end mr-2">
                       <p className="font-bold">Total tokens : {balance}</p>
                     </div>
                     <RequestTable
@@ -93,7 +93,8 @@ const RequestList = () => {
                       setState={setState}
                       state={state}
                       balance={balance}
-                    />
+                    /> */}
+                    <h1>Dashboard</h1>
                   </>
                 )}
               </div>
