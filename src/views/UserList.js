@@ -19,20 +19,20 @@ const UserList = () => {
   });
 
   useEffect(() => {
-    setLoader(true);
-    axios
-      .get(baseURL + "/api/auth/get-all-users", {
-        headers: {
-          Authorization: `Bearer ${admin}`,
-        },
-      })
-      .then((response) => {
-        setUserData(response?.data?.data);
-        setLoader(false);
-      })
-      .catch((err) => {
-        setLoader(false);
-      });
+    // setLoader(true);
+    // axios
+    //   .get(baseURL + "/api/auth/get-all-users", {
+    //     headers: {
+    //       Authorization: `Bearer ${admin}`,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     setUserData(response?.data?.data);
+    //     setLoader(false);
+    //   })
+    //   .catch((err) => {
+    //     setLoader(false);
+    //   });
   }, []);
 
   return (

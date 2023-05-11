@@ -1,1 +1,2 @@
-export const baseURL = "https://humble-rub-production.up.railway.app"
+export const baseURL = "https://stcdevelopment-production-c9fd.up.railway.app"
+// export const baseURL = "http://localhost:3000"

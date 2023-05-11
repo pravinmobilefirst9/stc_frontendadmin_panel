@@ -7,39 +7,35 @@ import { baseURL } from "../data/const";
 import { TailSpin } from "react-loader-spinner";
 
 const Auth = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
 
   const authLogin = () => {
     setLoader(true);
-    if (process.env.REACT_APP_ADMINEMAIL === email.trim().toLowerCase()) {
       axios
-        .post(baseURL + "/api/auth/register", {
-          email: email.trim().toLowerCase(),
+        .post(baseURL + "/api/admin/login-admin", {
+          username: username.trim().toLowerCase(),
+          password: password.trim().toLowerCase(),
         })
         .then((response) => {
-          toast.success(`OTP send sucessfully. Please check your email..!`, {
+          toast.success(`Login Success`, {
             position: toast.POSITION.TOP_RIGHT,
           });
-          setTimeout(() => {
             setLoader(false);
-            navigate("/verify-otp", { state: email.trim().toLowerCase() });
-          }, 5000);
+            sessionStorage.setItem("admin", response?.data?.access_token);
+            navigate("/user-list", { state: username.trim().toLowerCase() });
+          
         })
         .catch((err) => {
-          toast.error("Email did not send. Please try again..!", {
+          toast.error("Wrong Password..!", {
             position: toast.POSITION.TOP_RIGHT,
           });
           setLoader(false);
         });
-    } else {
-      toast.error("Invalid admin credentials. Please check email id..!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      setLoader(false);
-    }
+  
   };
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -61,26 +57,40 @@ const Auth = () => {
                   <img src="/transperent.svg" />
                 </div>
                 <h1 className="text-4xl text-center font-semibold text-gray-700 dark:text-gray-200">
-                  5ire
+                  STC ADMIN
                 </h1>
               </div>
               <hr className="mt-2 mb-2 border-yellow-600" />
               <h2 className="text-lg mb-8 text-center font-semibold text-gray-700 dark:text-gray-200">
-                Please Enter Your E-mail Address
+                Login
               </h2>
               <label className="block text-sm">
                 <span className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  {/* Email id */}
+                  {/* Username */}
                 </span>
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="example@domain.com"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </label>
+
+              {/* <h2 className="text-lg mb-8 text-center font-semibold text-gray-700 dark:text-gray-200">
+                Please Enter Your E-mail Address
+              </h2> */}
+              <label className="block text-sm">
+                <span className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  {/* Password */}
+                </span>
+                <input
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="*******"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
 
               <div
-                onClick={!loader && email.length > 2 && authLogin}
+                onClick={!loader && username.length > 2 && authLogin}
                 className={`${
                   loader ? "opacity-60" : "none"
                 } flex items-center justify-center cursor-pointer w-full px-4 py-2 mt-8 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple`}
@@ -97,7 +107,7 @@ const Auth = () => {
                     visible={true}
                   />
                 ) : (
-                  "Send OTP"
+                  "Login"
                 )}
               </div>
               <hr className="my-8 border-purple-600" />
