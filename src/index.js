@@ -1,34 +1,20 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "assets/css/App.css";
-import {
-  HashRouter,
-  Route,
-  Switch,
-  Redirect,
-  BrowserRouter as Router,
-} from "react-router-dom";
-import AuthLayout from "layouts/auth";
-import AdminLayout from "layouts/admin";
-import RTLLayout from "layouts/rtl";
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from "theme/theme";
-import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
-  <ChakraProvider theme={theme}>
-    <React.StrictMode>
-      <ThemeEditorProvider>
-        <Router>
-          <Switch>
-            <Route path={`/auth`} component={AuthLayout} />
-            <Route path={`/admin`} component={AdminLayout} />
-            <Route path={`/rtl`} component={RTLLayout} />
-            <Redirect from="/" to="/admin" />
-          </Switch>
-        </Router>
-      </ThemeEditorProvider>
-    </React.StrictMode>
-  </ChakraProvider>,
-  document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
