@@ -14,6 +14,9 @@ export const headerData = [
   {
     title: "user verified",
   },
+  {
+    title: "setting",
+  },
 ];
 
 export const headerData2 = [

@@ -20,7 +20,20 @@ export async function login(username, password) {
 // }
 
 export async function userListing() {
+  console.log("api called ");
   const aUrl = url + "admin/get-user?page=0&pageSize=5";
+  const config = {
+    method: "get",
+    url: aUrl,
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+  return await axios(config);
+}
+export async function userSearch(searchText) {
+  const aUrl =
+    url + `admin/user-table-filter?search_text=${searchText}&page=0&pageSize=5`;
   const config = {
     method: "get",
     url: aUrl,
