@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ layout }) => {
@@ -8,25 +8,23 @@ const Sidebar = ({ layout }) => {
   const [clickRequest, setClickRequest] = useState(false);
   const [clickApproveRequest, setClickApproveRequest] = useState(false);
   const [tokenTranfer, setTokenTransfer] = useState(false);
-
+  const params = useParams();
   useEffect(() => {
     if (window.location.pathname === "/user-list") {
       setClickUser(true);
     }
-    if (window.location.pathname === "/approved-list") {
-      setClickApproveRequest(true);
-    }
     if (window.location.pathname === "/dashboard") {
       setClickRequest(true);
     }
-    if (window.location.pathname === "/token-transfer") {
-      setTokenTransfer(true);
+    if (window.location.pathname === `/user/setting/${params.id}`) {
+      setClickUser(true);
     }
   }, []);
 
   const sidebar = () => {
     setMSidebar(!mSidebar);
   };
+
   const navigate = useNavigate();
 
   const logout = () => {
@@ -68,7 +66,10 @@ const Sidebar = ({ layout }) => {
         }`}
         aria-label="Sidebar"
       >
-        <div className="relative h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div
+          className="relative h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800"
+          style={{ background: "#f7f7f7" }}
+        >
           <div
             onClick={sidebar}
             className="absolute right-4 top-6 inline-flex lg:hidden items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
@@ -84,7 +85,7 @@ const Sidebar = ({ layout }) => {
                       STC
                     </span>
                   </h1> */}
-                  <h1 style={{ fontSize: "30px" }}>STC</h1>
+                  <h1 style={{ fontSize: "30px", color: "black" }}>STC</h1>
                 </div>
               </div>
               <div className="border-2 -mt-0 mb-8 border-b-[#7E0CD6]"></div>
@@ -93,9 +94,9 @@ const Sidebar = ({ layout }) => {
             <li>
               <Link
                 to="/dashboard"
-                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
-                  clickRequest && "bg-red-500"
-                } dark:hover:bg-gray-700`}
+                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-black  hover:bg-gray-100 ${
+                  clickRequest && "bg-blue-500 "
+                } dark:hover:bg-blue-500`}
               >
                 <svg
                   aria-hidden="true"
@@ -112,9 +113,9 @@ const Sidebar = ({ layout }) => {
             <li>
               <Link
                 to="/user-list"
-                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ${
-                  clickUser && "bg-red-500"
-                } dark:hover:bg-gray-700`}
+                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 ${
+                  clickUser && "bg-blue-500 "
+                } dark:hover:bg-blue-500`}
               >
                 <svg
                   aria-hidden="true"

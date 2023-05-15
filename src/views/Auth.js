@@ -20,7 +20,7 @@ const Auth = () => {
     if (!admin) {
       navigate("/");
     } else {
-      navigate("/user-list");
+      navigate("/dashboard");
     }
   });
 

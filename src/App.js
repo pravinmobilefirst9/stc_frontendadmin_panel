@@ -1,5 +1,6 @@
 import React from "react";
 import UserList from "./views/UserList";
+import UserSetting from "./views/UserSetting";
 import RequestList from "./views/RequestList";
 import Otp from "./views/Otp";
 import Auth from "./views/Auth";
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" exact element={<Auth />} />
       {/* <Route path="/verify-otp" exact element={<Otp />} /> */}
       <Route path="/user-list" exact element={<UserList />} />
+      <Route path="/user/setting/:id" exact element={<UserSetting />} />
       <Route path="/dashboard" exact element={<RequestList />} />
       <Route path="/approved-list" exact element={<ApprovedList />} />
       <Route path="/token-transfer" exact element={<AdminTokenTransfer />} />
