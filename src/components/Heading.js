@@ -1,6 +1,6 @@
 import React from "react";
 
-const Heading = ({title}) => {
+const Heading = ({ title }) => {
   return (
     <div>
       <h2 class="mb-4 text-2xl font-extrabold text-gray-900 dark:text-white md:text-4xl lg:text-4xl">

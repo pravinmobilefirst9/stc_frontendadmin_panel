@@ -93,10 +93,11 @@ const Sidebar = ({ layout }) => {
 
             <li>
               <Link
+                //  style={{"color:red"}}
                 to="/dashboard"
                 className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-black  hover:bg-gray-100 ${
-                  clickRequest && "bg-blue-500 "
-                } dark:hover:bg-blue-500`}
+                  clickRequest && "bg-[#FF6600]"
+                }  dark:hover:bg-[#FF6600] dark:hover:text-white`}
               >
                 <svg
                   aria-hidden="true"
@@ -113,9 +114,11 @@ const Sidebar = ({ layout }) => {
             <li>
               <Link
                 to="/user-list"
-                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-black hover:bg-gray-100 ${
-                  clickUser && "bg-blue-500 "
-                } dark:hover:bg-blue-500`}
+                className={`flex items-center p-2 text-base font-normal  
+                 text-gray-900
+                 rounded-lg dark:text-black hover:bg-gray-100 ${
+                   clickUser && "bg-[#FF6600]"
+                 } dark:hover:bg-gray-500 dark:hover:text-white`}
               >
                 <svg
                   aria-hidden="true"

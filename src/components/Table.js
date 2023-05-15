@@ -9,7 +9,7 @@ function Items({ currentItems, itemOffset }) {
       <div className="bg-white" style={{ backgroundColor: "white" }}>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
               <tr>
                 {headerData?.map((title, idx) => {
                   return (
@@ -46,33 +46,36 @@ function Items({ currentItems, itemOffset }) {
               {currentItems.length > 0 ? (
                 currentItems.map((data, idx) => (
                   <>
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr className="bg-white border-b dark:bg-white-800 dark:border-gray-700">
                       <th
                         scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-black"
                       >
                         {itemOffset + idx + 1}
                       </th>
-                      <td className="px-6 py-4">{data?.email}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 text-black font-medium">
+                        {data?.email}
+                      </td>
+                      <td className="px-6 py-4 text-black font-medium">
                         {data?.user_id ? data?.user_id : "none"}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 text-black font-medium">
                         {data?.organization_admin === true ? "TRUE" : "False"}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 text-black font-medium">
                         {data?.user_verified === true ? "TRUE" : "False"}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 text-black font-medium">
                         {/* <img
                           style={{ cursor: "pointer" }}
                           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAACbUlEQVR4nM1W3WqTQRAd4Zzgb/VZFLyovoQUwQstVO+8UJ/BRtu74gO0vWqltukTCL0T9AH0prQQFWlmk/54ZTVGZrNrttvvSz4IFRcWwnyzc2bOnJ2NyP+4FFh0ZM+2kgtnB0S+i0COfDt2QEdOO5GJAqB2ArR36pzIhJIPqoLMeWqAnTYw6QFErnjwAUgv0Hf/q8hFfw646YDt8G1uKEiLvJcF+umAVSX3cxA38FEFlpU8Tu0WqxTIsnPAp5KABwqsKznrd//3QaEv8DFWWrqUvJFmp+QvJZ9/E7mU++6JXFaybj6J/48Web1an4CVCOJqtTtm6wC3FdhU4EvYjTZwy/vXalNKdkM1S5VA9kWuOfIoAM0G4GdK/i6gs+uAp4GJl8Hmiqo/sXoi5xR4HHti1PhKQrYJld0UzCozZSp5GOwPi4LDynXkB0d+Txq65jMFNhPbomXbEbnqgNeJvRF815OKj5R8b2cMQ3ZFzpeorB4ON2OTmyIXUop10JdmoO9FUSzD+HdAPaOOXLDZ5chWQsebANRIbEvWNw8CrCX2jeC7kSTaceSWkq88daekTT5KxeAbPVoMk5kYZkbK2xodb3ykzyScBs/k/SQkOB/lPXIq/K0KWE0u7JTZfNZAQ4HPYW/Eoduu1e4m/VquBOID2jBNsrbLaDTmvtqf6vMZlcc2yYdXYu8JsFOiwkOrIsy2evgde3JyA9uWRDlQ9uaE7FbKprQLPTE1mvyzb9OVHj57LmySJxR5NWZ7JjbeJrY9D5Uevrjs0cqVY3MwDtt4T/Jzdmbog1d12exKqtkaO2ApUH/4nv3frXHWH4ZSYj11JTdiAAAAAElFTkSuQmCC"
                         /> */}
                         <Link to={`/user/setting/${data?.user_id}`}>
-                          <img
+                          {/* <img
                             style={{ cursor: "pointer" }}
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAAsTAAALEwEAmpwYAAACd0lEQVR4nM1WzWoUQRAuwYN/UZ/FgIfEl5Ag7EED0ZsHf5AguF0zYNbEW/ABkpxUYnZ9gkBugj6AXoLCqkgyVZNET4nGkarume3emd0diBELGnpruuur+qq6agH+S0FeAuRMl+HF4wMy9MYDWv8bBqchpvMVevaAtkrf5U6U3KgLsmCN0Udo8oTqZpMxBc9BMAdLr0P89YyeeUSXAWnT6mlhBAg3QkP0Ewy9AEM7JRAsziSAvAJIB6GeG4OBxDvDH6qN0i4gr4HhOV2yt7oqB94XkQ4UTMZD7+gXID+GB9/Olh3bOgfILXcmj3Af4u1LdbIEgPS8B0JXVddMr4Dh14D8xa0OIE+681Ng6NBRtlwPJN65CMjf3aU5Z+geIP2uyM8hGLprz/C8c44qow8lOwGY3i5yItRoJM7bPErj/bb7SVuZvOd0NysiyE5quIbfgeEfnsFV/W7pyqNYUm8fphcA6aWn77io1jydsPJW7wgGxJ9ODaiclqOtWyT5fvd0QLHJI6Ouc+pJpS3B+IdAmVC3qL0Ladt7cK8cHR1Pt6x5i6VgaNXTtx1Q26M+BeQNMPzMUtcvEd0KikESPaoYmjwRFENEM6PL2yZ6N6BPSjgAY6/i6I6j+GlR3iO7Qi7S33oPdkp14rXQaPizW+2i6UZ8zXNkpR6IXJZmGr6TeaWxX2aTMY0kpPZAO/lQkXki46GyS/OeS3ZLl+zznJQb8KY6MYSyvpkjzVX63sAunWlO9MHTfl/+pusNPh0XyXhBUVGN3opopki8dGwZD7UGXwHGjXLlSB90zRbdO6meZ0MGXl2xvSuPaOPoBgeJ5KJXHMf4d+sI8gebWgbN2b6oxQAAAABJRU5ErkJggg=="
-                          ></img>
+                          ></img> */}
+                          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAACG0lEQVR4nNWXu24VMRCGPyIhwRMgIOESCR4IKRQJCAl2ZnXKtBSkAEE6eAqUiJYgEVo4FOEFQpqTHlDCpSGEQd7dkD27ttcrbZCwNI3tmW9tj8f/wv/SLOO6Ke9N+VCYMLYRcycPFnJTrGGLwwGWOWsrzLT6lWce8JPWvBVm7A5n+kFHzJuyW23jfAP82gN+OTUn42rh62I0/LuhR0GFfVNumXLJlEemfG+BhW8mPDDlvNt2U/Zq491wU06bMvGsyAU/9PZP269A/8TFjsOFzQRAPxM2o9ACfJcLJnwaEPol+bqZcmMwcMbNJGi16svRMy3HtguLn/1Pu8e5dLDyOAJ9bjkX/87NmDVhLQK/HwblXDNFi+JQJtePENTrD6dMWQ+AvxZ3X3hqGeJYx47lZe9KksP6SlvwEXNJV04Y18FbCYmy3XlEwscE8NbwYGWnH1h5l7TVGbMRqCupvxPivJ0+n4wlE1ZNeeWtx6XTmkskb3IJL4LJJWxUsRejxcQ9c5GvXq87FysNQ+PXqdks50pnAXGJVCZTeHuFg34FRLidkGxplrGUBi0f8f3BwO6tzmtFwwt1ciWlmPSHj30yalpn1dVH81y7AQeBsd1O/dWSPspnUxaqkvjQW8enpc9C5XMMHfXTXZPiwWjUZ1PeeMAbLTFRisJJMvSohTSSV94Kq4G5cZ3Vp1XP58kJekLg5i+Mq/P/4hdmqPYH92RW4CVOLtQAAAAASUVORK5CYII=" />{" "}
                         </Link>
                       </td>
                     </tr>
@@ -123,7 +126,10 @@ function Table({ itemsPerPage, userData }) {
           pageLinkClassName="px-3 py-2 focus:outline-none leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           breakClassName="px-3 py-2 -mt-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           nextLabel={
-            <div className="px-3 py-[9px] -mt-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <div
+              style={{ color: "white" }}
+              className="px-3 py-[9px] -mt-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
               Next
             </div>
           }
@@ -132,7 +138,10 @@ function Table({ itemsPerPage, userData }) {
           pageCount={pageCount}
           previousLinkClassName="focus:outline-none"
           previousLabel={
-            <div className="px-3 py-[9px] -mt-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <div
+              style={{ color: "white" }}
+              className="px-3 py-[9px] -mt-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
               Previous
             </div>
           }
