@@ -94,7 +94,31 @@ const RequestList = () => {
                       state={state}
                       balance={balance}
                     /> */}
-                    <h1>Dashboard</h1>
+                    {/* <h1>Dashboard</h1> */}
+                    <div class="flex-grow p-6">
+                      <div class="flex items-center justify-between">
+                        <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+                        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                          Create New
+                        </button>
+                      </div>
+                      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                          <h3 class="text-lg font-bold mb-4">Total Orders</h3>
+                          <p class="text-3xl font-bold">1,234</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                          <h3 class="text-lg font-bold mb-4">
+                            Total Customers
+                          </h3>
+                          <p class="text-3xl font-bold">567</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                          <h3 class="text-lg font-bold mb-4">Total Revenue</h3>
+                          <p class="text-3xl font-bold">$123,456</p>
+                        </div>
+                      </div>
+                    </div>
                   </>
                 )}
               </div>

@@ -44,3 +44,15 @@ export async function userSearch(searchText) {
 
   return await axios(config);
 }
+export async function userSetting(userid) {
+  const aUrl = url + `admin/get-user-setting-data?user_id=${userid}`;
+  const config = {
+    method: "get",
+    url: aUrl,
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+
+  return await axios(config);
+}

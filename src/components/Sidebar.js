@@ -118,7 +118,7 @@ const Sidebar = ({ layout }) => {
                  text-gray-900
                  rounded-lg dark:text-black hover:bg-gray-100 ${
                    clickUser && "bg-[#FF6600]"
-                 } dark:hover:bg-gray-500 dark:hover:text-white`}
+                 } dark:hover:bg-[#FF6600] dark:hover:text-white`}
               >
                 <svg
                   aria-hidden="true"
