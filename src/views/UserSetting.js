@@ -8,11 +8,12 @@ import Sidebar from "../components/Sidebar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { userListing, userSearch, userSetting } from "../api/api";
 import SettingButton from "../components/SettingButton";
+import ResetPasswordModal from "../components/ResetPasswordModal";
 
 const UserSetting = () => {
   const [userData, setUserData] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [searchtext, setSearchText] = useState("");
+  const [openModal, setOpen] = useState(false);
   const admin = localStorage.getItem("auth-token");
   const navigate = useNavigate();
   const params = useParams();
@@ -30,7 +31,7 @@ const UserSetting = () => {
     if (!admin) {
       navigate("/");
     }
-  });
+  }, []);
 
   useEffect(() => {
     // setLoader(true);
@@ -58,8 +59,6 @@ const UserSetting = () => {
     setLoader(false);
     getData();
   }, [params.id]);
-
-  console.log("userData", userData.length);
 
   return (
     <div>
@@ -156,7 +155,11 @@ const UserSetting = () => {
                           <div className="border-2 mt-5 mb-16 border-b-[#FF6600]"></div>
                           <div className="mt-6 border-t border-gray-100">
                             <dl className="divide-y divide-gray-100">
-                              <SettingButton title={"  Reset password"} />
+                              <SettingButton
+                                title={"  Reset password"}
+                                open={openModal}
+                                setOpen={setOpen}
+                              />
 
                               <SettingButton title={" Change User Status"} />
                               <SettingButton title={" Edit User Details"} />
@@ -174,6 +177,13 @@ const UserSetting = () => {
               </div>
             </div>
           </>
+        }
+      />
+      <ResetPasswordModal
+        open={openModal}
+        setOpen={setOpen}
+        userId={
+          userData && userData.length == undefined ? userData.user_id : null
         }
       />
     </div>

@@ -11,25 +11,41 @@ import { userListing, userSearch } from "../api/api";
 const UserList = () => {
   const [userData, setUserData] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [clientValue, setClientValue] = useState(true);
+  const [vendorValue, setVendorValue] = useState(true);
   const [searchtext, setSearchText] = useState("");
   const admin = localStorage.getItem("auth-token");
   const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    console.log("handle search clicked ");
     if (searchtext.length > 0) {
-      const res = await userSearch(searchtext);
-      console.log("res data ", res.data);
-      setUserData(res.data);
+      const res = await userSearch(searchtext, 0, 5, clientValue, vendorValue);
+      setUserData(res.data.data);
     }
+  };
+
+  const handlecheckboxVendor = (value) => {
+    setVendorValue(value.target.checked);
+  };
+  const handlecheckboxClient = (value) => {
+    setClientValue(value.target.checked);
+  };
+
+  const getData = async () => {
+    const res = await userListing(0, 5, clientValue, vendorValue);
+    if (res?.data && res.data) {
+      setUserData(res.data.data);
+      setLoader(false);
+    }
+    setLoader(false);
   };
 
   useEffect(() => {
     if (!admin) {
       navigate("/");
     }
-  });
+  }, []);
 
   useEffect(() => {
     // setLoader(true);
@@ -47,17 +63,8 @@ const UserList = () => {
     //     setLoader(false);
     //   });
     setLoader(true);
-    const getData = async () => {
-      const res = await userListing();
-      if (res?.data && res.data) {
-        setUserData(res.data);
-        console.log("res.data", res?.data);
-        setLoader(false);
-      }
-      setLoader(false);
-    };
     getData();
-  }, []);
+  }, [clientValue, vendorValue]);
 
   return (
     <div>
@@ -129,7 +136,63 @@ const UserList = () => {
                         </button>
                       </div>
                     </form>
-                    <Table itemsPerPage={5} userData={userData} />
+
+                    <>
+                      <div
+                        style={{
+                          width: "20%",
+                          alignItems: "flex-start",
+                          display: "flex",
+                          justifyContent: "space-evenly",
+                        }}
+                        class="flex flex-row"
+                      >
+                        <div class="flex items-center mb-2">
+                          <input
+                            type="checkbox"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                            onChange={handlecheckboxClient}
+                            value={"1"}
+                            checked={clientValue}
+                          />
+                          <label
+                            for="option1"
+                            class="ml-3 text-sm font-medium text-gray-700"
+                          >
+                            Client
+                          </label>
+                        </div>
+                        <div class="flex items-center mb-2">
+                          <input
+                            type="checkbox"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                            onChange={handlecheckboxVendor}
+                            value={"1"}
+                            checked={vendorValue}
+                          />
+                          <label
+                            for="option2"
+                            class="ml-3 text-sm font-medium text-gray-700"
+                          >
+                            Vendor
+                          </label>
+                        </div>
+                        {/* <div class="flex items-center">
+                          <input
+                            type="checkbox"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                          />
+                          <label
+                            for="option3"
+                            class="ml-3 text-sm font-medium text-gray-700"
+                          >
+                            Option 3
+                          </label>
+                        </div> */}
+                      </div>
+                    </>
+
+                    <Table itemsPerPage={2} userData={userData} />
                   </>
                 )}
               </div>

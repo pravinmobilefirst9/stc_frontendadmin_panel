@@ -60,7 +60,7 @@ function Items({ currentItems, itemOffset }) {
                         {data?.user_id ? data?.user_id : "none"}
                       </td>
                       <td className="px-6 py-4 text-black font-medium">
-                        {data?.organization_admin === true ? "TRUE" : "False"}
+                        {data?.userType}
                       </td>
                       <td className="px-6 py-4 text-black font-medium">
                         {data?.user_verified === true ? "TRUE" : "False"}
@@ -114,7 +114,6 @@ function Table({ itemsPerPage, userData }) {
 
     setItemOffset(newOffset);
   };
-
   return (
     <>
       <Items currentItems={currentItems} itemOffset={itemOffset} />
@@ -134,7 +133,7 @@ function Table({ itemsPerPage, userData }) {
             </div>
           }
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={10}
           pageCount={pageCount}
           previousLinkClassName="focus:outline-none"
           previousLabel={

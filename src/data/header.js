@@ -9,7 +9,7 @@ export const headerData = [
     title: "User ID",
   },
   {
-    title: "organization admin",
+    title: "user type",
   },
   {
     title: "user verified",
